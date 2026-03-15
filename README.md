@@ -1,61 +1,110 @@
-# Pi Extensions & Skills
+# 🧩 Pi Extensions & Skills
 
-A [Pi Package](https://github.com/badlogic/pi-mono) bundling custom extensions and skills for the Pi coding agent.
+[![Pi Package](https://img.shields.io/badge/pi--package-v1.0.0-blue?style=flat-square)](https://github.com/badlogic/pi-mono)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](./LICENSE)
 
-## Install
+A [Pi Package](https://github.com/badlogic/pi-mono) bundling custom **extensions** and **skills** for the [Pi coding agent](https://github.com/badlogic/pi-mono).
+
+> Extensions add tools and capabilities to Pi. Skills guide the agent's behavior and workflows.
+
+## ⚡ Quick Install
 
 ```bash
 pi install git:github.com/Youhai020616/pi-extensions
 ```
 
-That's it. All extensions and skills are loaded automatically.
+All extensions and skills are loaded automatically. Update anytime with:
 
-## What's Inside
+```bash
+pi update
+```
 
-### Extensions
+---
+
+## 📦 Extensions
 
 | Extension | Description |
 |-----------|-------------|
-| [telegram-bot](./extensions/telegram-bot/) | Remote control Pi from Telegram with native streaming output |
+| [telegram-bot](./extensions/telegram-bot/) | 📱 Remote control Pi from Telegram with native streaming output via `sendMessageDraft` (Bot API 9.5) |
 
-### Skills
+### Telegram Bot Highlights
 
-| Skill | Description |
+- **Bidirectional** — Send messages from Telegram, Pi responds in both Telegram and terminal
+- **Native streaming** — Text appears word-by-word like ChatGPT, powered by `sendMessageDraft`
+- **Auto-connect** — Set `TELEGRAM_BOT_TOKEN` env var, Pi connects on startup
+- **Zero dependencies** — Uses Node.js built-in `fetch`, no npm install needed
+
+👉 See [telegram-bot/README.md](./extensions/telegram-bot/README.md) for full setup guide.
+
+---
+
+## 🧠 Skills
+
+14 skills covering the full development lifecycle — from brainstorming to shipping.
+
+### 💡 Design & Planning
+
+| Skill | When to Use |
 |-------|-------------|
-| brainstorming | Explore ideas and design before implementation |
-| dispatching-parallel-agents | Run 2+ independent tasks in parallel |
-| executing-plans | Execute implementation plans with review checkpoints |
-| finishing-a-development-branch | Guide completion of dev work (merge, PR, cleanup) |
-| receiving-code-review | Handle code review feedback with technical rigor |
-| requesting-code-review | Verify work meets requirements before merging |
-| subagent-driven-development | Execute plans with independent subagent tasks |
-| systematic-debugging | Debug any bug or test failure methodically |
-| test-driven-development | Write tests before implementation |
-| using-git-worktrees | Create isolated git worktrees for feature work |
-| using-superpowers | Find and use skills effectively |
-| verification-before-completion | Verify before claiming work is done |
-| writing-plans | Create detailed implementation plans from specs |
-| writing-skills | Create, edit, and verify skills |
+| [brainstorming](./skills/brainstorming/) | Before any creative work — creating features, building components, adding functionality. Explores intent, requirements and design before implementation. |
+| [writing-plans](./skills/writing-plans/) | When you have a spec or requirements for a multi-step task, before touching code |
 
-## Project Structure
+### 🔨 Implementation
+
+| Skill | When to Use |
+|-------|-------------|
+| [test-driven-development](./skills/test-driven-development/) | When implementing any feature or bugfix — write tests before implementation code |
+| [executing-plans](./skills/executing-plans/) | When you have a written implementation plan to execute with review checkpoints |
+| [subagent-driven-development](./skills/subagent-driven-development/) | When executing implementation plans with independent tasks in the current session |
+| [dispatching-parallel-agents](./skills/dispatching-parallel-agents/) | When facing 2+ independent tasks that can run without shared state |
+| [using-git-worktrees](./skills/using-git-worktrees/) | When starting feature work that needs isolation — creates isolated git worktrees with smart directory selection |
+
+### 🐛 Debugging & Verification
+
+| Skill | When to Use |
+|-------|-------------|
+| [systematic-debugging](./skills/systematic-debugging/) | When encountering any bug, test failure, or unexpected behavior — before proposing fixes |
+| [verification-before-completion](./skills/verification-before-completion/) | Before claiming work is done — requires running verification commands and confirming output. Evidence before assertions. |
+
+### 🔍 Code Review & Shipping
+
+| Skill | When to Use |
+|-------|-------------|
+| [requesting-code-review](./skills/requesting-code-review/) | When completing tasks, implementing features, or before merging to verify requirements |
+| [receiving-code-review](./skills/receiving-code-review/) | When receiving feedback — requires technical rigor, not blind implementation |
+| [finishing-a-development-branch](./skills/finishing-a-development-branch/) | When implementation is complete and tests pass — guides merge, PR, or cleanup |
+
+### 🛠️ Meta
+
+| Skill | When to Use |
+|-------|-------------|
+| [using-superpowers](./skills/using-superpowers/) | At conversation start — establishes how to find and use skills |
+| [writing-skills](./skills/writing-skills/) | When creating, editing, or verifying skills before deployment |
+
+---
+
+## 📁 Project Structure
 
 ```
 pi-extensions/
-├── package.json              ← Pi Package manifest
+├── package.json                ← Pi Package manifest
 ├── extensions/
 │   └── telegram-bot/
-│       ├── telegram-bot.ts
+│       ├── telegram-bot.ts     ← Extension code
 │       └── README.md
 └── skills/
-    ├── brainstorming/
+    ├── brainstorming/          ← 14 skills
+    │   ├── SKILL.md
+    │   ├── scripts/
+    │   └── ...
     ├── systematic-debugging/
     ├── test-driven-development/
-    └── ... (14 skills total)
+    └── ...
 ```
 
-## Manual Install
+## 🔧 Manual Install
 
-If you prefer not to use `pi install`, copy individual pieces:
+If you prefer not to use `pi install`:
 
 ```bash
 # Single extension
@@ -64,15 +113,20 @@ cp extensions/telegram-bot/telegram-bot.ts ~/.pi/agent/extensions/
 # Single skill
 cp -r skills/brainstorming ~/.pi/agent/skills/
 
-# All skills
+# Everything
+cp -r extensions/* ~/.pi/agent/extensions/
 cp -r skills/* ~/.pi/agent/skills/
 ```
 
-## Adding New Extensions / Skills
+## ➕ Contributing
 
-1. **Extension**: Create a folder under `extensions/` with a `.ts` file and `README.md`
-2. **Skill**: Create a folder under `skills/` with a `SKILL.md`
-3. Commit and push — anyone with `pi install` gets the update via `pi update`
+**Add an extension:**
+1. Create `extensions/my-ext/` with a `.ts` file and `README.md`
+
+**Add a skill:**
+1. Create `skills/my-skill/` with a `SKILL.md`
+
+Commit, push, and `pi update` pulls the changes.
 
 ## License
 

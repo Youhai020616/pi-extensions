@@ -1,0 +1,16 @@
+{
+  "name": "pi-extensions",
+  "version": "1.0.0",
+  "description": "A collection of Pi coding agent extensions and skills",
+  "keywords": ["pi-package"],
+  "author": "Youhai020616",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Youhai020616/pi-extensions.git"
+  },
+  "pi": {
+    "extensions": ["./extensions"],
+    "skills": ["./skills"]
+  }
+}

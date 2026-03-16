@@ -26,6 +26,7 @@ pi update
 | Extension | Description |
 |-----------|-------------|
 | [telegram-bot](./extensions/telegram-bot/) | 📱 Remote control Pi from Telegram with native streaming output via `sendMessageDraft` (Bot API 9.5) |
+| [mcp-bridge](./extensions/mcp-bridge/) | 🔌 Single `mcp` tool for all MCP servers (GitHub, Tavily, Neon, Resend, etc.) — replaces verbose CLAUDE.md instructions, saves ~90% context |
 
 ### Telegram Bot Highlights
 
@@ -35,6 +36,15 @@ pi update
 - **Zero dependencies** — Uses Node.js built-in `fetch`, no npm install needed
 
 👉 See [telegram-bot/README.md](./extensions/telegram-bot/README.md) for full setup guide.
+
+### MCP Bridge Highlights
+
+- **One tool, all servers** — `list`, `search`, `schema`, `call` actions cover the full workflow
+- **Context efficient** — Replaces ~1500 tokens of CLAUDE.md instructions with ~200 token tool description
+- **Auto-discovery** — LLM can search and inspect tools before calling them
+- **JSON parsing** — Automatically extracts and formats response content
+
+👉 See [mcp-bridge/README.md](./extensions/mcp-bridge/README.md) for full setup guide.
 
 ---
 
@@ -89,8 +99,11 @@ pi update
 pi-extensions/
 ├── package.json                ← Pi Package manifest
 ├── extensions/
-│   └── telegram-bot/
-│       ├── telegram-bot.ts     ← Extension code
+│   ├── telegram-bot/
+│   │   ├── telegram-bot.ts
+│   │   └── README.md
+│   └── mcp-bridge/
+│       ├── mcp-bridge.ts
 │       └── README.md
 └── skills/
     ├── brainstorming/          ← 14 skills

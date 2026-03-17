@@ -50,7 +50,7 @@ pi update
 
 ## 🧠 Skills
 
-14 skills covering the full development lifecycle — from brainstorming to shipping.
+13 skills covering the full development lifecycle — from brainstorming to shipping. Zero redundancy, Pi-native compatible.
 
 ### 💡 Design & Planning
 
@@ -64,9 +64,7 @@ pi update
 | Skill | When to Use |
 |-------|-------------|
 | [test-driven-development](./skills/test-driven-development/) | When implementing any feature or bugfix — write tests before implementation code |
-| [executing-plans](./skills/executing-plans/) | When you have a written implementation plan to execute with review checkpoints |
-| [subagent-driven-development](./skills/subagent-driven-development/) | When executing implementation plans with independent tasks in the current session |
-| [dispatching-parallel-agents](./skills/dispatching-parallel-agents/) | When facing 2+ independent tasks that can run without shared state |
+| [plan-execution](./skills/plan-execution/) | When you have a plan to execute or 2+ independent tasks — auto-selects between subagent dispatch, parallel agents, or single-agent sequential mode |
 | [using-git-worktrees](./skills/using-git-worktrees/) | When starting feature work that needs isolation — creates isolated git worktrees with smart directory selection |
 
 ### 🐛 Debugging & Verification
@@ -74,22 +72,56 @@ pi update
 | Skill | When to Use |
 |-------|-------------|
 | [systematic-debugging](./skills/systematic-debugging/) | When encountering any bug, test failure, or unexpected behavior — before proposing fixes |
-| [verification-before-completion](./skills/verification-before-completion/) | Before claiming work is done — requires running verification commands and confirming output. Evidence before assertions. |
+| [verification-before-completion](./skills/verification-before-completion/) | Before claiming work is done — requires running verification commands and confirming output. Includes common command templates for Node/Python/Rust/Go. |
 
 ### 🔍 Code Review & Shipping
 
 | Skill | When to Use |
 |-------|-------------|
-| [requesting-code-review](./skills/requesting-code-review/) | When completing tasks, implementing features, or before merging to verify requirements |
 | [receiving-code-review](./skills/receiving-code-review/) | When receiving feedback — requires technical rigor, not blind implementation |
-| [finishing-a-development-branch](./skills/finishing-a-development-branch/) | When implementation is complete and tests pass — guides merge, PR, or cleanup |
+| [finishing-a-development-branch](./skills/finishing-a-development-branch/) | When implementation is complete — self code review, test verification, merge/PR/cleanup options, commit conventions |
+
+### 🏗️ Engineering Practices
+
+| Skill | When to Use |
+|-------|-------------|
+| [api-design](./skills/api-design/) | When designing, building, or reviewing REST/GraphQL APIs — endpoint design, error handling, versioning, auth |
+| [docker-deploy](./skills/docker-deploy/) | When containerizing apps — Dockerfile best practices, docker-compose, CI/CD pipelines |
+| [security-checklist](./skills/security-checklist/) | When reviewing security — OWASP Top 10, secrets management, input validation, dependency audit |
 
 ### 🛠️ Meta
 
 | Skill | When to Use |
 |-------|-------------|
-| [using-superpowers](./skills/using-superpowers/) | At conversation start — establishes how to find and use skills |
 | [writing-skills](./skills/writing-skills/) | When creating, editing, or verifying skills before deployment |
+
+---
+
+## 🚀 Typical Workflow
+
+Skills chain naturally through a feature development lifecycle:
+
+```
+1. "I want to add a comments feature"
+   → brainstorming (explore requirements, design solution)
+
+2. "Design approved, create a plan"
+   → writing-plans (break into tasks, write implementation plan)
+
+3. "Start development"
+   → using-git-worktrees (create isolated branch)
+   → plan-execution (execute tasks step by step)
+   → test-driven-development (TDD for each task)
+
+4. "Tests are failing"
+   → systematic-debugging (find root cause before fixing)
+
+5. "Done, ready to ship"
+   → verification-before-completion (run tests, verify)
+   → finishing-a-development-branch (review + merge/PR)
+```
+
+You don't need to remember skill names — just describe your task and Pi auto-selects the right skill. Use `/skill:name` to force a specific one.
 
 ---
 
@@ -106,13 +138,19 @@ pi-extensions/
 │       ├── mcp-bridge.ts
 │       └── README.md
 └── skills/
-    ├── brainstorming/          ← 14 skills
-    │   ├── SKILL.md
-    │   ├── scripts/
-    │   └── ...
-    ├── systematic-debugging/
+    ├── brainstorming/          ← 13 skills
+    ├── writing-plans/
     ├── test-driven-development/
-    └── ...
+    ├── plan-execution/
+    ├── using-git-worktrees/
+    ├── systematic-debugging/
+    ├── verification-before-completion/
+    ├── receiving-code-review/
+    ├── finishing-a-development-branch/
+    ├── api-design/
+    ├── docker-deploy/
+    ├── security-checklist/
+    └── writing-skills/
 ```
 
 ## 🔧 Manual Install

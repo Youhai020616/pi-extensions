@@ -130,6 +130,26 @@ From 24 failure memories:
 - Implications of success
 - ANY communication suggesting completion/correctness
 
+## Common Verification Commands
+
+Quick reference for common project types:
+
+| Project Type | Lint | Type Check | Test | Build |
+|-------------|------|------------|------|-------|
+| **Node/TS** | `npx eslint .` | `npx tsc --noEmit` | `npm test` | `npm run build` |
+| **Python** | `ruff check .` | `mypy .` | `pytest` | `python -m build` |
+| **Rust** | `cargo clippy` | `cargo check` | `cargo test` | `cargo build` |
+| **Go** | `golangci-lint run` | `go vet ./...` | `go test ./...` | `go build ./...` |
+
+**Full verification sequence (run all that apply):**
+```bash
+# 1. Lint
+# 2. Type check
+# 3. Unit tests
+# 4. Build
+# 5. Integration tests (if applicable)
+```
+
 ## The Bottom Line
 
 **No shortcuts for verification.**

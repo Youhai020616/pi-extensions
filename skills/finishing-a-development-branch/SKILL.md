@@ -15,6 +15,31 @@ Guide completion of development work by presenting clear options and handling ch
 
 ## The Process
 
+### Step 0: Self Code Review
+
+Before merging, review your own changes:
+
+```bash
+BASE_SHA=$(git merge-base HEAD main 2>/dev/null || git merge-base HEAD master)
+git diff $BASE_SHA HEAD --stat        # Overview of changes
+git diff $BASE_SHA HEAD               # Full diff
+```
+
+**Review checklist:**
+- [ ] Changes match requirements (line-by-line against plan/spec)
+- [ ] No leftover debug code, TODOs, or commented-out code
+- [ ] No unintended file changes
+- [ ] Edge cases handled
+- [ ] Error handling present
+
+**If subagent is available:** dispatch a code-reviewer subagent with the diff.
+**If not:** self-review using the checklist above — be honest, not optimistic.
+
+**Severity guide:**
+- **Critical** — fix immediately (security, data loss, crash)
+- **Important** — fix before merge (missing requirements, bad logic)
+- **Minor** — note for later (naming, style)
+
 ### Step 1: Verify Tests
 
 **Before presenting options, verify tests pass:**
@@ -198,3 +223,40 @@ git worktree remove <worktree-path>
 
 **Pairs with:**
 - **using-git-worktrees** - Cleans up worktree created by that skill
+
+## Commit Message Convention
+
+Use [Conventional Commits](https://www.conventionalcommits.org/):
+
+```
+<type>(<scope>): <short summary>
+
+<body - what and why, not how>
+```
+
+| Type | When |
+|------|------|
+| `feat` | New feature |
+| `fix` | Bug fix |
+| `refactor` | Code restructuring (no behavior change) |
+| `docs` | Documentation only |
+| `test` | Adding/fixing tests |
+| `chore` | Build, CI, dependencies |
+
+**PR body template:**
+```markdown
+## Summary
+- What changed and why (2-3 bullets)
+
+## Changes
+- List of specific changes
+
+## Testing
+- How it was verified
+- [ ] Unit tests pass
+- [ ] Build succeeds
+- [ ] Manual testing (if applicable)
+
+## Breaking Changes
+- None / List any breaking changes
+```
